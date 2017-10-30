@@ -18,6 +18,7 @@ import java.util.List;
 public class JokeListFragment extends Fragment {
 
     private RecyclerView mJokeRecyclerView;
+    private JokeAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +27,17 @@ public class JokeListFragment extends Fragment {
         mJokeRecyclerView = (RecyclerView) v.findViewById(R.id.joke_recycler_view);
         mJokeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        updateUI();
+
         return v;
+    }
+
+    private void updateUI() {
+        JokeLab jokeLab = JokeLab.getInstance(getActivity());
+        List<Joke> jokes = jokeLab.getJokes();
+
+        mAdapter = new JokeAdapter(jokes);
+        mJokeRecyclerView.setAdapter(mAdapter);
     }
 
     private class JokeHolder extends RecyclerView.ViewHolder {
