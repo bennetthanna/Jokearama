@@ -13,6 +13,8 @@ import java.util.UUID;
 public class JokeLab {
     private static JokeLab sJokeLab;
     private List<Joke> mJokes;
+    private int mNumJokes;
+    private int mNumJokesCompletelyViewed;
 
     public static JokeLab getInstance(Context context) {
         if (sJokeLab == null) {
@@ -46,5 +48,19 @@ public class JokeLab {
         }
 
         return null;
+    }
+
+    public int getNumJokes() {
+        return mJokes.size();
+    }
+
+    public int getNumJokesCompletelyViewed() {
+        mNumJokesCompletelyViewed = 0;
+        for (Joke joke : mJokes) {
+            if (joke.isCompletelyViewed()) {
+                mNumJokesCompletelyViewed++;
+            }
+        }
+        return mNumJokesCompletelyViewed;
     }
 }
