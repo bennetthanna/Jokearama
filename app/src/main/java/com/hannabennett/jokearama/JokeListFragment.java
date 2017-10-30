@@ -33,12 +33,22 @@ public class JokeListFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         JokeLab jokeLab = JokeLab.getInstance(getActivity());
         List<Joke> jokes = jokeLab.getJokes();
 
-        mAdapter = new JokeAdapter(jokes);
-        mJokeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new JokeAdapter(jokes);
+            mJokeRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     private class JokeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,6 +66,9 @@ public class JokeListFragment extends Fragment {
         public void bind(Joke joke) {
             mJoke = joke;
             mTitleTextView.setText(mJoke.getTitle());
+            if (mJoke.isCompletelyViewed()) {
+                mTitleTextView.setBackgroundColor(0xff888888);
+            }
         }
 
         @Override
