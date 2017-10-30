@@ -44,7 +44,9 @@ public class JokeListFragment extends Fragment {
 
         @Override
         public JokeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+
+            return new JokeHolder(layoutInflater, parent);
         }
 
         @Override
@@ -54,7 +56,7 @@ public class JokeListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mJokes.size();
         }
     }
 }
