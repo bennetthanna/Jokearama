@@ -25,4 +25,10 @@ public class JokeListFragment extends Fragment {
 
         return v;
     }
+
+    private class JokeHolder extends RecyclerView.ViewHolder {
+        public JokeHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_joke, parent, false));
+        }
+    }
 }
