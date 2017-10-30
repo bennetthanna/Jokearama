@@ -1,16 +1,24 @@
 package com.hannabennett.jokearama;
 
+import java.util.UUID;
+
 /**
  * Created by HannaBennett on 10/30/17.
  */
 
 public class Joke {
+    private UUID mId;
     private String mTitle;
     private boolean mCompletelyViewed;
     private String[] mJokeLines;
 
     public Joke() {
+        mId = UUID.randomUUID();
         mCompletelyViewed = false;
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public String getTitle() {
