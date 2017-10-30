@@ -30,6 +30,7 @@ public class JokeLab {
                     "knock knock", "who's there", "boo", "boo who",
                     "it was just a joke, didn't mean to make you cry"
             });
+            mJokes.add(joke);
         }
     }
 

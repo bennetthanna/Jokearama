@@ -1,13 +1,13 @@
 package com.hannabennett.jokearama;
 
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -41,8 +41,19 @@ public class JokeListFragment extends Fragment {
     }
 
     private class JokeHolder extends RecyclerView.ViewHolder {
+
+        private TextView mTitleTextView;
+        private Joke mJoke;
+
         public JokeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_joke, parent, false));
+
+            mTitleTextView = (TextView) itemView.findViewById(R.id.joke_title);
+        }
+
+        public void bind(Joke joke) {
+            mJoke = joke;
+            mTitleTextView.setText(mJoke.getTitle());
         }
     }
 
@@ -62,7 +73,8 @@ public class JokeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(JokeHolder holder, int position) {
-
+            Joke joke = mJokes.get(position);
+            holder.bind(joke);
         }
 
         @Override
