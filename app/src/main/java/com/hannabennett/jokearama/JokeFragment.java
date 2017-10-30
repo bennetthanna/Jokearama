@@ -16,6 +16,7 @@ import java.util.UUID;
 public class JokeFragment extends Fragment {
     private Joke mJoke;
     private TextView mJokeTextView;
+    private int mJokeLineIndex;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,24 @@ public class JokeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_joke, container, false);
 
         mJokeTextView = (TextView) v.findViewById(R.id.joke_fragment_text_view);
-        mJokeTextView.setText(mJoke.getJokeLines()[0]);
+        mJokeLineIndex = 0;
+        updateJokeLine(mJokeLineIndex);
+        mJokeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mJokeLineIndex++;
+                updateJokeLine(mJokeLineIndex);
+            }
+        });
 
         return v;
+    }
+
+    public void updateJokeLine(int index) {
+        if (index >= 5) {
+            mJoke.setCompletelyViewed(true);
+            return;
+        }
+        mJokeTextView.setText(mJoke.getJokeLines()[index]);
     }
 }
