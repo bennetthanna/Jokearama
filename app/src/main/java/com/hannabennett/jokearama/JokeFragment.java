@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 /**
  * Created by HannaBennett on 10/30/17.
  */
@@ -18,7 +20,8 @@ public class JokeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mJoke = new Joke();
+        UUID jokeId = (UUID) getActivity().getIntent().getSerializableExtra(JokeActivity.EXTRA_JOKE_ID);
+        mJoke = JokeLab.getInstance(getActivity()).getJoke(jokeId);
     }
 
     @Override
