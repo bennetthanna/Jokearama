@@ -60,9 +60,9 @@ public class JokeFragment extends Fragment {
                         break;
                     case 4:
                         updateJokeLine(mJokeTextView5, mJokeLineIndex);
+                        mJoke.setCompletelyViewed(true);
                         break;
                     default:
-                        mJoke.setCompletelyViewed(true);
                         return;
                 }
             }
