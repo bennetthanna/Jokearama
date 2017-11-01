@@ -4,4 +4,5 @@
     <string name="reset_views_dialog_title">
         Are you sure you want to reset all of your joke viewings?
     </string>
+    <string name="subtitle_format">%1$d jokes, %2$d completed</string>
 </resources>

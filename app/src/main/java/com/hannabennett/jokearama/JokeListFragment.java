@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,6 +88,16 @@ public class JokeListFragment extends Fragment {
         }
     }
 
+    private void updateSubtitle() {
+        JokeLab jokeLab = JokeLab.getInstance(getActivity());
+        int numJokes = jokeLab.getNumJokes();
+        int numJokesViewed = jokeLab.getNumJokesCompletelyViewed();
+
+        String subtitle = getString(R.string.subtitle_format, numJokes, numJokesViewed);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setSubtitle(subtitle);
+    }
+
     private void updateUI() {
         JokeLab jokeLab = JokeLab.getInstance(getActivity());
         List<Joke> jokes = jokeLab.getJokes();
@@ -97,6 +108,7 @@ public class JokeListFragment extends Fragment {
         } else {
             mAdapter.notifyDataSetChanged();
         }
+        updateSubtitle();
     }
 
     private class JokeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
