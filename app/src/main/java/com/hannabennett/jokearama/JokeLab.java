@@ -65,6 +65,9 @@ public class JokeLab {
     }
 
     public void resetNumJokesCompletelyViewed() {
+        for (Joke joke : mJokes) {
+            joke.setCompletelyViewed(false);
+        }
         mNumJokesCompletelyViewed = 0;
     }
 }

@@ -1,5 +1,6 @@
 package com.hannabennett.jokearama;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,8 @@ public class JokeListFragment extends Fragment {
 
     private static final String DIALOG_RESET_VIEWS = "DialogResetViews";
 
+    private static final int REQUEST_DECISION = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,19 @@ public class JokeListFragment extends Fragment {
         updateUI();
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_DECISION) {
+            JokeLab jokeLab = JokeLab.getInstance(getActivity());
+            jokeLab.resetNumJokesCompletelyViewed();
+            updateUI();
+        }
     }
 
     @Override
@@ -63,6 +79,7 @@ public class JokeListFragment extends Fragment {
             case R.id.reset_jokes_viewed:
                 FragmentManager manager = getFragmentManager();
                 ResetViewsFragment dialog = new ResetViewsFragment();
+                dialog.setTargetFragment(JokeListFragment.this, REQUEST_DECISION);
                 dialog.show(manager, DIALOG_RESET_VIEWS);
                 return true;
             default:
