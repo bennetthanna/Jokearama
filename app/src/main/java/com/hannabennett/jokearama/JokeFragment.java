@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.UUID;
@@ -15,7 +16,11 @@ import java.util.UUID;
 
 public class JokeFragment extends Fragment {
     private Joke mJoke;
-    private TextView mJokeTextView;
+    private TextView mJokeTextView1;
+    private TextView mJokeTextView2;
+    private TextView mJokeTextView3;
+    private TextView mJokeTextView4;
+    private TextView mJokeTextView5;
     private int mJokeLineIndex;
 
     @Override
@@ -29,25 +34,44 @@ public class JokeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_joke, container, false);
 
-        mJokeTextView = (TextView) v.findViewById(R.id.joke_fragment_text_view);
+        mJokeTextView1 = (TextView) v.findViewById(R.id.joke_fragment_text_view_1);
+        mJokeTextView2 = (TextView) v.findViewById(R.id.joke_fragment_text_view_2);
+        mJokeTextView3 = (TextView) v.findViewById(R.id.joke_fragment_text_view_3);
+        mJokeTextView4 = (TextView) v.findViewById(R.id.joke_fragment_text_view_4);
+        mJokeTextView5 = (TextView) v.findViewById(R.id.joke_fragment_text_view_5);
+
         mJokeLineIndex = 0;
-        updateJokeLine(mJokeLineIndex);
-        mJokeTextView.setOnClickListener(new View.OnClickListener() {
+        updateJokeLine(mJokeTextView1, mJokeLineIndex);
+
+        LinearLayout joke_layout = (LinearLayout) v.findViewById(R.id.joke_layout);
+        joke_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mJokeLineIndex++;
-                updateJokeLine(mJokeLineIndex);
+                switch(mJokeLineIndex) {
+                    case 1:
+                        updateJokeLine(mJokeTextView2, mJokeLineIndex);
+                        break;
+                    case 2:
+                        updateJokeLine(mJokeTextView3, mJokeLineIndex);
+                        break;
+                    case 3:
+                        updateJokeLine(mJokeTextView4, mJokeLineIndex);
+                        break;
+                    case 4:
+                        updateJokeLine(mJokeTextView5, mJokeLineIndex);
+                        break;
+                    default:
+                        mJoke.setCompletelyViewed(true);
+                        return;
+                }
             }
         });
 
         return v;
     }
 
-    public void updateJokeLine(int index) {
-        if (index >= 5) {
-            mJoke.setCompletelyViewed(true);
-            return;
-        }
-        mJokeTextView.setText(mJoke.getJokeLines()[index]);
+    public void updateJokeLine(TextView view, int index) {
+        view.setText(mJoke.getJokeLines()[index]);
     }
 }
