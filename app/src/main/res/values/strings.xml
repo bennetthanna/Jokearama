@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jokearama</string>
+    <string name="reset_jokes_viewed">Reset Jokes Viewed</string>
 </resources>
