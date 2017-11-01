@@ -126,9 +126,6 @@ public class JokeListFragment extends Fragment {
         public void bind(Joke joke) {
             mJoke = joke;
             mTitleTextView.setText(mJoke.getTitle());
-            if (mJoke.isCompletelyViewed()) {
-                mTitleTextView.setBackgroundColor(0xff888888);
-            }
         }
 
         @Override
@@ -156,6 +153,9 @@ public class JokeListFragment extends Fragment {
         public void onBindViewHolder(JokeHolder holder, int position) {
             Joke joke = mJokes.get(position);
             holder.bind(joke);
+            if (joke.isCompletelyViewed()) {
+                holder.itemView.setBackgroundColor(0xff888888);
+            }
         }
 
         @Override
